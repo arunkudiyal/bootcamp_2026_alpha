@@ -22,7 +22,27 @@ public class DijkstraAlgorithm {
     }
 
     public void dijkstraAlgorithm(List<List<int[]>> graph, int start) {
-        PriorityQueue<int[]> pq = new PriorityQueue<>();
+        int[] cost = new int[V];
+        Arrays.fill(cost, Integer.MAX_VALUE);
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+        cost[start] = 0;
+        pq.add(new int[] {start, 0});
+        while(!pq.isEmpty()) {
+            int[] curr = pq.poll();
+            int u = curr[0]; int w = curr[1];
+            // explore the neighbors of 'u'
+            for(int i=0; i < graph.get(u).size(); i++) {
+                int[] next = graph.get(u).get(i);
+                int v = next[0]; int d = next[1];
+                if(cost[u] + d < cost[v]) {
+                    cost[v] = cost[u] + d;
+                    pq.add(new int[] {v, cost[v]});
+                }
+            }
+        }
+        for(int i=0; i < V; i++) System.out.print(cost[i] + " ");
+        System.out.println();
     }
 
     public static void main(String[] args) {
@@ -46,6 +66,7 @@ public class DijkstraAlgorithm {
         obj.addEdge(3, 4, 9);
 
         // System.out.println(obj.graph);
-        obj.displayGraph();
+        // obj.displayGraph();
+        obj.dijkstraAlgorithm(obj.graph, 0);
     }
 }
