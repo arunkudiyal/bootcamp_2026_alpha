@@ -30,7 +30,7 @@ public class DijkstraAlgorithm {
         pq.add(new int[] {start, 0});
         while(!pq.isEmpty()) {
             int[] curr = pq.poll();
-            int u = curr[0]; int w = curr[1];
+            int u = curr[0];
             // explore the neighbors of 'u'
             for(int i=0; i < graph.get(u).size(); i++) {
                 int[] next = graph.get(u).get(i);
@@ -65,8 +65,6 @@ public class DijkstraAlgorithm {
         obj.addEdge(5, 4, 10);
         obj.addEdge(3, 4, 9);
 
-        // System.out.println(obj.graph);
-        // obj.displayGraph();
         obj.dijkstraAlgorithm(obj.graph, 0);
     }
 }
