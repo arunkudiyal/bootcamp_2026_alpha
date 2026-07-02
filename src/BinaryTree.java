@@ -1,48 +1,30 @@
-class Node {
-    int data;
-    Node left;
-    Node right;
-    Node(int value) {
-        data = value;
-        left = right = null;
-    }
-}
-public class BinaryTree {
-    Node root;  // stores ref/add of the first node of BT
-    BinaryTree() {
-        root = null;
+class BinaryTree {
+    static class Student {
+        int rNo;
+        String name;
+        float score;
+        String dept;
+        // Constructor --> assigns value to class properties value
+        // Non-Parameterised Constructor ---> Student() { }
+        // Parameterised Constructor
+        public Student(int rNo, String name, float score, String dept) {
+            this.rNo = rNo;
+            this.name = name;
+            this.score = score;
+            this.dept = dept;
+        }
     }
 
-    public void inOrderTraversal(Node node) {
-        if(node != null) {
-            inOrderTraversal(node.left);        // L
-            System.out.print(node.data + " ");  // D
-            inOrderTraversal(node.right);       // R
-        }
-    }
-    public void preOrderTraversal(Node node) {
-        if(node != null) {
-            System.out.print(node.data + " ");
-            preOrderTraversal(node.left);
-            preOrderTraversal(node.right);
-        }
-    }
     public static void main(String[] args) {
-        BinaryTree tree = new BinaryTree();     // root = null | BT is empty
+        // objects & reference variable
+        // className objName = new Constructor();
+        Student s1 = new Student(1, "Student One", 2.5f, "CSE");
+        System.out.println(s1.score);
+        Student s2 = new Student(2, "Student Two", 2.5f, "CSE");
+        System.out.println(s2.name);
 
-        tree.root = new Node(10);
-
-        tree.root.left = new Node(20);
-        tree.root.right = new Node(30);
-
-        tree.root.right.right = new Node(70);
-        tree.root.left.left = new Node(40);
-
-        tree.root.left.left.right = new Node(50);
-        tree.root.right.left = new Node(60);
-
-        tree.inOrderTraversal(tree.root);
-        System.out.println();
-        tree.preOrderTraversal(tree.root);
+        // Reference Variable = new Constructor()
+        // Student demo = null;
+        // demo = new Student();
     }
 }
