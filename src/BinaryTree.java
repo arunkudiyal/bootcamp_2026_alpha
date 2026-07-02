@@ -1,30 +1,33 @@
 class BinaryTree {
-    static class Student {
-        int rNo;
-        String name;
-        float score;
-        String dept;
-        // Constructor --> assigns value to class properties value
-        // Non-Parameterised Constructor ---> Student() { }
-        // Parameterised Constructor
-        public Student(int rNo, String name, float score, String dept) {
-            this.rNo = rNo;
-            this.name = name;
-            this.score = score;
-            this.dept = dept;
+    TreeNode root;
+    BinaryTree() { this.root = null; }
+    static class TreeNode {
+        int data;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int data) {
+            this.data = data;
+            this.left = this.right = null;
         }
     }
-
+    public void inOrder(TreeNode node) {
+        if(node != null) {
+            inOrder(node.left);
+            System.out.print(node.data + " ");
+            inOrder(node.right);
+        }
+    }
     public static void main(String[] args) {
-        // objects & reference variable
-        // className objName = new Constructor();
-        Student s1 = new Student(1, "Student One", 2.5f, "CSE");
-        System.out.println(s1.score);
-        Student s2 = new Student(2, "Student Two", 2.5f, "CSE");
-        System.out.println(s2.name);
+        BinaryTree tree = new BinaryTree(); // root = null
+        tree.root = new TreeNode(10);
+        tree.root.left = new TreeNode(20);
+        tree.root.right = new TreeNode(30);
+        tree.root.left.left = new TreeNode(40);
+        tree.root.left.right = new TreeNode(50);
+        tree.root.right.left = new TreeNode(60);
+        tree.root.right.right = new TreeNode(70);
 
-        // Reference Variable = new Constructor()
-        // Student demo = null;
-        // demo = new Student();
+        tree.inOrder(tree.root);
+        System.out.println();
     }
 }
