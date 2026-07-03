@@ -17,6 +17,9 @@ class BinaryTree {
             inOrder(node.right);
         }
     }
+    public void insert(int data) {
+
+    }
     public static void main(String[] args) {
         BinaryTree tree = new BinaryTree(); // root = null
         tree.root = new TreeNode(10);
