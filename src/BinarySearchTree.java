@@ -19,6 +19,13 @@ public class BinarySearchTree {
 
         return node;
     }
+
+    public TreeNode search(TreeNode root, int val) {
+        if(root == null || val == root.data) return root;
+        else if(val < root.data) return search(root.left, val);
+        else return search(root.right, val);
+    }
+
     public void inOrder(TreeNode node) {
         if(node != null) {
             inOrder(node.left);
@@ -39,6 +46,7 @@ public class BinarySearchTree {
         bst.root = bst.insertData(bst.root, 32);
         bst.root = bst.insertData(bst.root, 7);
         bst.root = bst.insertData(bst.root, 3);
+        bst.root = bst.insertData(bst.root, 50);
 
         bst.inOrder(bst.root);          //
     }
