@@ -34,6 +34,35 @@ public class BinarySearchTree {
         return Math.max(lHeight, rHeight) + 1;
     }
 
+    public int maxValue(TreeNode node) {
+        TreeNode temp = node; int min = Integer.MAX_VALUE;
+        while(temp != null) {
+            min = temp.val;
+            temp = temp.right;
+        }
+        return min;
+    }
+    public TreeNode deleteNode(TreeNode node, int key) {
+        if(node == null) return node;
+        // phase 1 :- search for the key
+        if(key < node.val) node.left = deleteNode(node.left, key);
+        else if(key > node.val) node.right = deleteNode(node.right, key);
+        else {
+            // key is found
+            // phase 2 --> delete the key
+            // case 2 :- Node with exactly one child
+            if(node.right == null) return node.left;
+            else if(node.left == null) return node.right;
+            else {
+                // case 3:- Node wuth excatly 2 children
+                node.val = maxValue(node.left);
+                // BST properties voilate (duplicate elements)
+                node.left = deleteNode(node.left, node.val);
+            }
+        }
+        return node;
+    }
+
     public void inOrder(TreeNode node) {
         if(node != null) {
             inOrder(node.left);
