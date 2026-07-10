@@ -1,3 +1,10 @@
+import com.sun.source.tree.Tree;
+
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BinarySearchTree {
     TreeNode root;
     BinarySearchTree() { this.root = null; }
@@ -37,7 +44,7 @@ public class BinarySearchTree {
     public int maxValue(TreeNode node) {
         TreeNode temp = node; int min = Integer.MAX_VALUE;
         while(temp != null) {
-            min = temp.val;
+            min = temp.data;
             temp = temp.right;
         }
         return min;
@@ -45,8 +52,8 @@ public class BinarySearchTree {
     public TreeNode deleteNode(TreeNode node, int key) {
         if(node == null) return node;
         // phase 1 :- search for the key
-        if(key < node.val) node.left = deleteNode(node.left, key);
-        else if(key > node.val) node.right = deleteNode(node.right, key);
+        if(key < node.data) node.left = deleteNode(node.left, key);
+        else if(key > node.data) node.right = deleteNode(node.right, key);
         else {
             // key is found
             // phase 2 --> delete the key
@@ -55,9 +62,9 @@ public class BinarySearchTree {
             else if(node.left == null) return node.right;
             else {
                 // case 3:- Node wuth excatly 2 children
-                node.val = maxValue(node.left);
+                node.data = maxValue(node.left);
                 // BST properties voilate (duplicate elements)
-                node.left = deleteNode(node.left, node.val);
+                node.left = deleteNode(node.left, node.data);
             }
         }
         return node;
@@ -69,6 +76,20 @@ public class BinarySearchTree {
             System.out.print(node.data + " ");
             inOrder(node.right);
         }
+    }
+
+    public void levelOrder(TreeNode node) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        /* insert --> Back (.add) | Deletion --> Front (.poll) */
+        queue.add(node);
+        while(!queue.isEmpty()) {
+            TreeNode current = queue.poll();
+            System.out.print(current.data + " ");
+            // stack.add()
+            if(current.right != null) queue.add(current.right);
+            if(current.left != null) queue.add(current.left);
+        }
+        System.out.println();
     }
 
     public static void main(String[] args) {
@@ -84,6 +105,10 @@ public class BinarySearchTree {
         bst.root = bst.insertData(bst.root, 7);
         bst.root = bst.insertData(bst.root, 3);
         bst.root = bst.insertData(bst.root, 50);
+
+        bst.levelOrder(bst.root);
+
+        System.out.println(bst.height(bst.root));
 
         bst.inOrder(bst.root);
         System.out.println();
